@@ -81,13 +81,17 @@ export function Hero() {
               style={{ background: "var(--gradient-brand)", opacity: 0.2 }}
             />
             <div className="card-soft card-lift relative flex flex-col items-center gap-6 p-8 sm:p-10 transition-all duration-300 hover:shadow-2xl">
-              <img
-                src={symbol.url}
-                alt="Logotipo de BoliviaOS"
-                width={1170}
-                height={598}
-                className="w-full max-w-[19rem] object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]"
-              />
+              <picture>
+                <source srcSet={symbol.url.replace(/\.png$/, ".webp")} type="image/webp" />
+                <img
+                  src={symbol.url}
+                  alt="Logotipo de BoliviaOS"
+                  width={1170}
+                  height={598}
+                  className="w-full max-w-[19rem] object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]"
+                  decoding="async"
+                />
+              </picture>
               <div className="w-full rounded-2xl border border-border/80 bg-surface/80 p-4 text-center backdrop-blur-sm">
                 <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
                   Versión actual

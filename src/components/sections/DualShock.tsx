@@ -562,14 +562,18 @@ export function DualShock() {
             />
 
             <div className="ds2-float relative z-10 flex items-center justify-center py-2 sm:py-3">
-              <img
-                src="/images/dualshock2.png"
-                alt="Mando DualShock 2 para PlayStation 2"
-                width={475}
-                height={308}
-                className="w-full max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none"
-                loading="lazy"
-              />
+              <picture>
+                <source srcSet="/images/dualshock2.webp" type="image/webp" />
+                <img
+                  src="/images/dualshock2.png"
+                  alt="Mando DualShock 2 para PlayStation 2"
+                  width={475}
+                  height={308}
+                  className="w-full max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <div className="mt-3 sm:mt-4 text-center z-10">
@@ -668,14 +672,18 @@ export function DualShock() {
             />
 
             <div className="ds2-float relative z-10 flex items-center justify-center py-2 sm:py-4">
-              <img
-                src="/images/keyboard_knup_v3.png"
-                alt="Teclado USB Knup KP-2201 compatible con PlayStation 2"
-                width={2452}
-                height={642}
-                className="w-full max-w-[300px] sm:max-w-[340px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.3)] select-none rounded-lg"
-                loading="lazy"
-              />
+              <picture>
+                <source srcSet="/images/keyboard_knup_v3.webp" type="image/webp" />
+                <img
+                  src="/images/keyboard_knup_v3.png"
+                  alt="Teclado USB Knup KP-2201 compatible con PlayStation 2"
+                  width={2452}
+                  height={642}
+                  className="w-full max-w-[300px] sm:max-w-[340px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.3)] select-none rounded-lg"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <div className="mt-3 sm:mt-4 text-center z-10">

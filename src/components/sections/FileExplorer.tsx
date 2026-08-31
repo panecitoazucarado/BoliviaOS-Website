@@ -73,14 +73,18 @@ export function FileExplorerSection() {
 
             {/* Real PS2 screenshot */}
             <div className="relative bg-black">
-              <img
-                src="/images/file-explorer.png"
-                alt="Captura real del Explorador de Archivos de BoliviaOS corriendo en PlayStation 2"
-                width={2178}
-                height={1620}
-                className="w-full h-auto object-contain select-none"
-                loading="lazy"
-              />
+              <picture>
+                <source srcSet="/images/file-explorer.webp" type="image/webp" />
+                <img
+                  src="/images/file-explorer.png"
+                  alt="Captura real del Explorador de Archivos de BoliviaOS corriendo en PlayStation 2"
+                  width={2178}
+                  height={1620}
+                  className="w-full h-auto object-contain select-none"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               {/* Subtle CRT scanline overlay */}
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.035]"

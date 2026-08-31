@@ -174,15 +174,18 @@ function ScreenshotHeroCard({
               )}
 
               {/* Screenshot Image */}
-              <img
-                key={displaySrc}
-                src={displaySrc}
-                alt={displayAlt}
-                width={displayWidth}
-                height={displayHeight}
-                className="w-full h-auto object-contain select-none transition-opacity duration-300"
-                loading="lazy"
-              />
+              <picture key={displaySrc}>
+                <source srcSet={displaySrc.replace(/\.png$/, ".webp")} type="image/webp" />
+                <img
+                  src={displaySrc}
+                  alt={displayAlt}
+                  width={displayWidth}
+                  height={displayHeight}
+                  className="w-full h-auto object-contain select-none transition-opacity duration-300"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
 
               {/* Navigation Chevrons for multi-slide */}
               {hasSlides && (
