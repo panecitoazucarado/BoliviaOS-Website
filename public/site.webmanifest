@@ -1,0 +1,21 @@
+{
+  "name": "BoliviaOS — Entorno Multifunción para PlayStation 2",
+  "short_name": "BoliviaOS",
+  "description": "Entorno multifunción y sistema operativo para PlayStation 2 (PS2) basado en Open PS2 Loader.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfbf8",
+  "theme_color": "#0f6f43",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/boliviaos-symbol.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
