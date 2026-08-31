@@ -65,7 +65,6 @@ bun preview
 ## Autor
 
 - **Desarrollador**: José Manuel Alvarez (*NightlySki_Zero*)
-- **Ubicación**: Villa Montes, Tarija, Bolivia
 - **Canal de YouTube**: [@josemayt6235](https://www.youtube.com/@josemayt6235)
 
 ---
