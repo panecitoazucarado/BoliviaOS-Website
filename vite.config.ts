@@ -6,10 +6,22 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const allowedHosts = ["boliviaos.site", "www.boliviaos.site", "localhost", "127.0.0.1"];
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+  },
+  vite: {
+    server: {
+      host: "0.0.0.0",
+      allowedHosts,
+    },
+    preview: {
+      host: "0.0.0.0",
+      allowedHosts,
+    },
   },
 });
