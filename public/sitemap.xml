@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://boliviaos.com/</loc>
-    <lastmod>2026-08-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://boliviaos.site/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://boliviaos.com/assets/boliviaos-symbol.png</image:loc>
-      <image:title>BoliviaOS para PlayStation 2</image:title>
+      <image:loc>https://boliviaos.site/assets/boliviaos-symbol.png</image:loc>
+      <image:title>BoliviaOS — Sistema Operativo para PlayStation 2</image:title>
       <image:caption>Logotipo oficial del entorno BoliviaOS para PlayStation 2</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://boliviaos.com/images/file-explorer.png</image:loc>
+      <image:loc>https://boliviaos.site/images/file-explorer.png</image:loc>
       <image:title>Explorador de Archivos BoliviaOS PS2</image:title>
-      <image:caption>Captura real del explorador de archivos en PlayStation 2</image:caption>
+      <image:caption>Explorador de archivos nativo con soporte mc, mass, hdd, host y cdfs en PlayStation 2</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://boliviaos.com/images/lanzador-juegos.png</image:loc>
+      <image:loc>https://boliviaos.site/images/lanzador-juegos.png</image:loc>
       <image:title>Lanzador de Juegos BoliviaOS PS2</image:title>
-      <image:caption>Lanzador de juegos PS2 y PS1 desde HDD, USB y SMB</image:caption>
+      <image:caption>Lanzador de juegos PS2 y PS1 desde HDD, USB, red SMB y MX4SIO</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://boliviaos.com/images/terminal-comandos.png</image:loc>
-      <image:title>SuperTerminal CLI BoliviaOS PS2</image:title>
-      <image:caption>Terminal interactiva y shell UNIX en PlayStation 2</image:caption>
+      <image:loc>https://boliviaos.site/images/terminal-comandos.png</image:loc>
+      <image:title>Terminal SuperTerminal CLI BoliviaOS PS2</image:title>
+      <image:caption>Terminal interactiva y shell UNIX en PlayStation 2 con teclado USB</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://boliviaos.com/images/dualshock2.png</image:loc>
+      <image:loc>https://boliviaos.site/images/dualshock2.png</image:loc>
       <image:title>Mando DualShock 2 BoliviaOS</image:title>
       <image:caption>Asignación de controles DualShock 2 para PlayStation 2</image:caption>
     </image:image>
