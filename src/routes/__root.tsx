@@ -95,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "BoliviaOS — Sistema Operativo y Entorno Multifunción para PlayStation 2 (PS2)" },
       {
         property: "og:description",
-        content: "Entorno multifunción para PlayStation 2 basado en Open PS2 Loader. Lanzador de juegos, explorador de archivos, terminal CLI, reproductor de audio y utilidades de sistema.",
+        content: "BoliviaOS amplía las capacidades de Open PS2 Loader reuniendo lanzamiento de juegos, exploración de archivos, reproducción de audio, edición de texto y utilidades de sistema en una sola interfaz integrada para la consola.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://boliviaos.site/" },
@@ -109,11 +109,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "598" },
       { property: "og:image:alt", content: "BoliviaOS — Sistema Operativo para PlayStation 2" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@BoliviaOS" },
       { name: "twitter:title", content: "BoliviaOS — Entorno Multifunción para PlayStation 2 (PS2)" },
       {
         name: "twitter:description",
-        content: "Descarga BoliviaOS para PS2: explorador de archivos, lanzador de juegos, editor de texto y terminal CLI en hardware real.",
+        content: "BoliviaOS amplía las capacidades de Open PS2 Loader reuniendo lanzamiento de juegos, exploración de archivos, reproducción de audio, edición de texto y utilidades de sistema en una sola interfaz integrada para la consola.",
       },
       { name: "twitter:image", content: "https://boliviaos.site/assets/boliviaos-symbol.png" },
       { name: "twitter:image:alt", content: "BoliviaOS — Sistema Operativo para PlayStation 2" },
