@@ -72,4 +72,4 @@ bun preview
 
 ## Licencia y Atribución
 
-Este portal web y el proyecto BoliviaOS son desarrollos de la comunidad homebrew para PlayStation 2. PlayStation 2 es una marca registrada de Sony Interactive Entertainment Inc. Este proyecto es independiente y no está respaldado ni afiliado con Sony.
+Este portal web y el proyecto BoliviaOS son desarrollos para la comunidad homebrew de PlayStation 2 por @Josema. PlayStation 2 es una marca registrada de Sony Interactive Entertainment Inc. Este proyecto es independiente y no está respaldado ni afiliado con Sony.
