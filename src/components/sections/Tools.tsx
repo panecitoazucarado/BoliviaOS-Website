@@ -11,6 +11,11 @@ import {
   ChevronLeft,
   ChevronRight,
   Video,
+  Youtube,
+  Search,
+  Download,
+  AlertCircle,
+  Film,
   type LucideIcon,
 } from "lucide-react";
 import { Section, SectionHeading } from "../Section";
@@ -247,6 +252,302 @@ function ScreenshotHeroCard({
   );
 }
 
+// YouTube Downloader interactive hero card
+function YouTubeDownloaderHeroCard({
+  tool,
+  groupIdx,
+  itemIdx,
+  Icon,
+}: {
+  tool: { title: string; description: string; status: string; href?: string };
+  groupIdx: number;
+  itemIdx: number;
+  Icon: LucideIcon;
+}) {
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [video, setVideo] = useState<{
+    id: string;
+    title: string;
+    author: string;
+    thumbnail: string;
+    originalUrl: string;
+  } | null>(null);
+
+  const processUrl = async (inputUrl?: string) => {
+    const target = (inputUrl ?? url).trim();
+    setError(null);
+    if (!target) {
+      setError("Pega un enlace de YouTube válido.");
+      return;
+    }
+
+    const shortsMatch = target.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/i);
+    const watchMatch = target.match(/[?&]v=([a-zA-Z0-9_-]{11})/i);
+    const youtuBeMatch = target.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/i);
+    const embedMatch = target.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/i);
+    const id =
+      shortsMatch?.[1] ||
+      watchMatch?.[1] ||
+      youtuBeMatch?.[1] ||
+      embedMatch?.[1] ||
+      (/^[a-zA-Z0-9_-]{11}$/.test(target) ? target : null);
+
+    if (!id) {
+      setError("No se reconoció un enlace de YouTube válido.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const cleanUrl = `https://www.youtube.com/watch?v=${id}`;
+      let title = `Video de YouTube (${id})`;
+      let author = "YouTube";
+      let thumbnail = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+      try {
+        const res = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(cleanUrl)}&format=json`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.title) title = data.title;
+          if (data.author_name) author = data.author_name;
+          if (data.thumbnail_url) thumbnail = data.thumbnail_url;
+        }
+      } catch (_) {}
+
+      setVideo({ id, title, author, thumbnail, originalUrl: cleanUrl });
+    } catch (_) {
+      setError("Error al procesar el enlace.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        setUrl(text);
+        processUrl(text);
+      }
+    } catch (_) {
+      const el = document.getElementById("tools-yt-input");
+      if (el) el.focus();
+    }
+  };
+
+  return (
+    <Reveal delay={groupIdx * 60 + itemIdx * 40} className="sm:col-span-2 lg:col-span-3">
+      <article className="card-soft card-lift overflow-hidden bg-card border-primary/40 ring-1 ring-primary/20 shadow-md">
+        <div className="grid gap-0 lg:grid-cols-[0.55fr_0.45fr] lg:items-stretch">
+          {/* Left info & input */}
+          <div className="flex flex-col justify-between p-4 sm:p-6">
+            <div>
+              <div className="flex items-start justify-between gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+                </span>
+                <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-primary">
+                  Web App · 100% Funcional
+                </span>
+              </div>
+
+              <h4 className="mt-3.5 text-sm sm:text-base font-bold text-foreground">
+                {tool.title}
+              </h4>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                {tool.description}
+              </p>
+
+              {/* Interactive Input Form */}
+              <div className="mt-4 rounded-xl border border-border bg-surface/60 p-2.5 sm:p-3">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    processUrl();
+                  }}
+                  className="flex gap-2"
+                >
+                  <div className="relative flex-1">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5 text-muted-foreground">
+                      <Youtube className="h-4 w-4 text-crimson" />
+                    </div>
+                    <input
+                      id="tools-yt-input"
+                      type="url"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                      placeholder="Pega el enlace de YouTube aquí..."
+                      className="w-full rounded-lg border border-border bg-background pl-8 pr-14 py-2 text-xs text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                    <button
+                      type="button"
+                      onClick={handlePaste}
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded bg-surface-2 px-2 py-0.5 text-[0.65rem] font-semibold text-muted-foreground hover:text-foreground cursor-pointer"
+                    >
+                      Pegar
+                    </button>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-50 cursor-pointer"
+                  >
+                    {loading ? (
+                      <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
+                    ) : (
+                      <Search className="h-3.5 w-3.5" />
+                    )}
+                    <span>Buscar</span>
+                  </button>
+                </form>
+
+                {error && (
+                  <p className="mt-2 text-[0.7rem] text-destructive flex items-center gap-1">
+                    <AlertCircle className="h-3 w-3" />
+                    <span>{error}</span>
+                  </p>
+                )}
+
+                <div className="mt-2 flex items-center justify-between text-[0.68rem] text-muted-foreground">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const test = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                      setUrl(test);
+                      processUrl(test);
+                    }}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
+                    Probar video demo
+                  </button>
+                  <a
+                    href="/descargar-video"
+                    className="font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>Pantalla completa</span>
+                    <ExternalLink className="h-2.5 w-2.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Feature bullets */}
+              <ul className="mt-3.5 space-y-1.5">
+                {[
+                  "Descarga de videos en formato .MP4 optimizado para pendrive USB (mass0:/)",
+                  "Resoluciones mod-16 recomendadas para PlayStation 2 (360p y 480p)",
+                  "Extracción de pista de audio estéreo en formato MP3 para el reproductor de BoliviaOS",
+                  "Múltiples servidores de descarga integrados para garantizar 100% de disponibilidad",
+                ].map((feat) => (
+                  <li key={feat} className="flex items-start gap-2 text-[0.72rem] text-muted-foreground">
+                    <span className="mt-0.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="mt-4 font-mono text-[0.62rem] text-primary/60">
+              BOLIVIAOS WEB COMPANION · YOUTUBE MP4 ENGINE
+            </p>
+          </div>
+
+          {/* Right — live preview or demo state */}
+          <div className="relative overflow-hidden bg-black lg:border-l lg:border-border flex flex-col justify-between">
+            {/* Window chrome */}
+            <div className="flex items-center justify-between border-b border-white/10 bg-white/5 px-3 py-2 shrink-0">
+              <span className="flex gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-crimson/70" />
+                <span className="h-2 w-2 rounded-full bg-gold/80" />
+                <span className="h-2 w-2 rounded-full bg-primary/70" />
+              </span>
+              <span className="font-mono text-[0.6rem] text-white/40 truncate">
+                {video ? video.title : "Descargador YouTube MP4 — BoliviaOS"}
+              </span>
+              <span className="font-mono text-[0.6rem] text-primary/60">MP4 · USB Ready</span>
+            </div>
+
+            {/* Viewport / Results */}
+            <div className="relative flex-1 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-black via-zinc-950 to-black text-center min-h-[220px]">
+              {video ? (
+                <div className="w-full space-y-3 animate-in fade-in duration-200">
+                  <div className="relative mx-auto aspect-video max-w-[280px] overflow-hidden rounded-lg border border-white/15 shadow-lg">
+                    <img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute bottom-1.5 right-1.5 rounded bg-primary px-1.5 py-0.5 text-[0.6rem] font-bold text-primary-foreground">
+                      Compatible PS2
+                    </div>
+                  </div>
+
+                  <h5 className="text-xs font-bold text-white line-clamp-1 px-2">
+                    {video.title}
+                  </h5>
+
+                  <div className="grid grid-cols-2 gap-1.5 max-w-[320px] mx-auto pt-1">
+                    <a
+                      href={`https://cobalt.tools/?u=${encodeURIComponent(video.originalUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-primary px-2.5 py-1.5 text-[0.68rem] font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+                    >
+                      <Download className="h-3 w-3" />
+                      <span>Cobalt Ultra</span>
+                    </a>
+                    <a
+                      href={`https://savefrom.net/#url=${encodeURIComponent(video.originalUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-white/10 px-2.5 py-1.5 text-[0.68rem] font-semibold text-white hover:bg-white/20 transition-colors border border-white/15"
+                    >
+                      <Download className="h-3 w-3" />
+                      <span>SaveFrom</span>
+                    </a>
+                    <a
+                      href={`https://www.y2mate.com/youtube/${video.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-white/10 px-2.5 py-1.5 text-[0.68rem] font-semibold text-white hover:bg-white/20 transition-colors border border-white/15"
+                    >
+                      <Download className="h-3 w-3" />
+                      <span>Y2Mate</span>
+                    </a>
+                    <a
+                      href={`https://snapsave.io/es?url=${encodeURIComponent(video.originalUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-white/10 px-2.5 py-1.5 text-[0.68rem] font-semibold text-white hover:bg-white/20 transition-colors border border-white/15"
+                    >
+                      <Download className="h-3 w-3" />
+                      <span>SnapSave</span>
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2 py-4">
+                  <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary border border-primary/20">
+                    <Film className="h-6 w-6" />
+                  </div>
+                  <h5 className="text-xs font-semibold text-white">
+                    Pega un enlace para descargar en 1 Clic
+                  </h5>
+                  <p className="text-[0.68rem] text-white/50 max-w-[240px] mx-auto">
+                    Obtén el archivo .mp4 listo para copiar a tu memoria USB y reproducir con BoliviaOS en tu consola PS2.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
 export function Tools() {
   return (
     <Section id="tools">
@@ -292,6 +593,19 @@ export function Tools() {
                         "Selector de resolución de video GSM con salida hasta 1080p",
                         "Soporte de mandos inalámbricos Bluetooth con PADEMU (DualShock 3 y DualShock 4)",
                       ]}
+                    />
+                  );
+                }
+
+                // YouTube Downloader — wide interactive hero card
+                if (tool.title === "Descargador de Videos YouTube (.MP4)") {
+                  return (
+                    <YouTubeDownloaderHeroCard
+                      key={tool.title}
+                      tool={tool}
+                      groupIdx={groupIdx}
+                      itemIdx={itemIdx}
+                      Icon={Icon}
                     />
                   );
                 }
