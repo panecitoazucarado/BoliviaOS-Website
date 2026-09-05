@@ -23,6 +23,34 @@ export const navLinks = [
 ];
 
 
+export const toolSubLinks = [
+  {
+    title: "Descargar Videos .MP4 para BoliviaOS",
+    description: "Convierte y descarga videos de YouTube listos para PS2 y PC",
+    href: "/descargar-video",
+    badge: "Nuevo",
+    icon: "video",
+  },
+  {
+    title: "Todas las herramientas integradas",
+    description: "Lanzador de juegos, explorador de archivos, SuperTerminal y MCA",
+    href: "/#tools",
+    icon: "disc",
+  },
+  {
+    title: "Reproductor Multimedia PS2",
+    description: "Música MP3/OGG y visor de imágenes con aceleración IPU",
+    href: "/#tools",
+    icon: "media",
+  },
+  {
+    title: "SuperTerminal CLI",
+    description: "Consola interactiva de comandos UNIX para PlayStation 2",
+    href: "/#tools",
+    icon: "terminal",
+  },
+];
+
 export const toolCategories = [
   {
     category: "Juegos",
@@ -41,6 +69,14 @@ export const toolCategories = [
     category: "Multimedia",
     description: "Reproducción y visualización de medios",
     items: [
+      {
+        title: "Descargador de Videos YouTube (.MP4)",
+        description:
+          "Herramienta web integrada para descargar videos de YouTube directamente a tu computadora en formato .MP4 con solo pegar el enlace, listos para tu pendrive USB y reproducir en BoliviaOS para PS2.",
+        status: "Nuevo",
+        icon: "video",
+        href: "/descargar-video",
+      },
       {
         title: "Reproductor MP3 y OGG",
         description:

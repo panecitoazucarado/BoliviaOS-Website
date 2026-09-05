@@ -10,6 +10,7 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  Video,
   type LucideIcon,
 } from "lucide-react";
 import { Section, SectionHeading } from "../Section";
@@ -24,6 +25,7 @@ const icons: Record<string, LucideIcon> = {
   terminal: Terminal,
   disc: Disc,
   activity: Activity,
+  video: Video,
 };
 
 interface ScreenshotSlide {
@@ -481,18 +483,27 @@ export function Tools() {
                 }
 
                 // All other tools — standard compact card
+                const hasLink = Boolean((tool as any).href);
                 return (
                   <Reveal key={tool.title} delay={groupIdx * 60 + itemIdx * 40}>
                     <article
                       className={`card-soft card-lift flex flex-col justify-between h-full p-5 ${
-                        isDev ? "border-dashed border-border/80 bg-surface/40" : "bg-card"
+                        isDev
+                          ? "border-dashed border-border/80 bg-surface/40"
+                          : hasLink
+                          ? "border-primary/40 bg-card ring-1 ring-primary/15 shadow-sm"
+                          : "bg-card"
                       }`}
                     >
                       <div>
                         <div className="flex items-start justify-between gap-3">
                           <span
                             className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${
-                              isDev ? "bg-gold/15 text-gold" : "bg-primary/10 text-primary"
+                              isDev
+                                ? "bg-gold/15 text-gold"
+                                : hasLink
+                                ? "bg-primary/15 text-primary"
+                                : "bg-primary/10 text-primary"
                             }`}
                           >
                             <Icon className="h-4.5 w-4.5" aria-hidden="true" />
@@ -512,6 +523,18 @@ export function Tools() {
                           {tool.description}
                         </p>
                       </div>
+
+                      {hasLink && (
+                        <div className="mt-4 pt-3 border-t border-border/60">
+                          <a
+                            href={(tool as any).href}
+                            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-xs"
+                          >
+                            <span>Abrir herramienta web</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        </div>
+                      )}
                     </article>
                   </Reveal>
                 );
